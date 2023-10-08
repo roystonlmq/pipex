@@ -1,7 +1,0 @@
-# extensions
-a.out
-*.a
-
-# obj files
-.objs
-libft/*.o
