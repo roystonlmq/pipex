@@ -6,7 +6,7 @@
 /*   By: roylee <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 12:32:14 by roylee            #+#    #+#             */
-/*   Updated: 2023/09/17 16:58:07 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/08 13:42:52 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <stdarg.h>
 # include <string.h> // Unused header
 # include <stdio.h> // Unused header
 
@@ -65,6 +66,7 @@ int		ft_putunbr_base(unsigned long n, const char *base);
 int		ft_puthexa_u(unsigned long n, const char s);
 size_t	ft_nbrlen_base(long long int n, size_t base);
 size_t	ft_unbrlen_base(unsigned long n, size_t base);
+int		ft_printf(const char *format, ...);
 
 /* bonus */
 t_list	*ft_lstnew(void *content);
