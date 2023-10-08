@@ -1,3 +1,5 @@
 *.pdf
 *.out
 libft/*.a
+*.o
+libft/*.o
