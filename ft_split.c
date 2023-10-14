@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:49:28 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 13:59:53 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/14 14:21:49 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	ft_word_count(const char *s, char c)
 		if (*s != c)
 		{
 			i++;
-			s = ft_word_len(s, c);
+			s += ft_word_len(s, c);
 		}
 		else
 			s++;
