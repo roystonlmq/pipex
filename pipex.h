@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 13:30:43 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 14:12:13 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/14 14:18:18 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_pipe
 	char	*envpaths;
 	char	**cmd_paths;
 	char	**cmd_args;
+	char	*cmd;
 }	t_pipe;
 
 /*
@@ -64,7 +65,7 @@ void	close_child(t_pipe *piper);
 /*
 error_handler.c
 */
-int		putstr_fd(int fd, char *s);
+int		ft_putstr_fd(int fd, char *s);
 void	exception(char *error);
 
 /*
@@ -87,6 +88,11 @@ string.c
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);
+
+/*
+string2.c
+*/
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /*
 ft_split.c
