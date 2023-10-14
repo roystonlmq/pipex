@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 13:30:43 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 14:07:07 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/14 14:12:13 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdio.h> // perror
 # include <stdlib.h> // malloc, free, exit
 # include <unistd.h> // read, write, close, access, dup, dup2, execve, pipe
-# include "../GNL/get_next_line.h" // gnl func
 
 # define INFILE "Infile"
 # define OUTFILE "Outfile"
