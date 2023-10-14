@@ -6,11 +6,12 @@
 #    By: roylee <roylee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/08 13:53:53 by roylee            #+#    #+#              #
-#    Updated: 2023/10/14 14:10:52 by roylee           ###   ########.fr        #
+#    Updated: 2023/10/14 14:24:49 by roylee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.c init_child.c ft_split.c mem.c string.c
+SRCS = main.c init_child.c ft_split.c mem.c string.c error_handler.c string2.c \
+		cleaner.c
 
 OBJS = $(SRCS:.c=.o)
 
