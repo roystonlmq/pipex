@@ -6,13 +6,13 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:40:10 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 13:59:33 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/14 14:24:17 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static size_t	ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
@@ -25,7 +25,7 @@ static size_t	ft_strlen(const char *s)
 static char	*ft_strdup(const char *s)
 {
 	int		i;
-	char	*buf;
+	char	*buffer;
 
 	buffer = (char *)malloc(ft_strlen(s)+ 1);
 	if (!buffer)
@@ -65,7 +65,7 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s))
-		return (ft_calloc(1, 1));
+		return (ft_strdup(""));
 	if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
 	buffer = (char *)malloc(len + 1);
