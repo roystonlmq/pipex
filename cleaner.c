@@ -6,9 +6,11 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:12:15 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 13:41:38 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/14 14:25:18 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "pipex.h"
 
 void	close_all(t_pipe *piper)
 {
