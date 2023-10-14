@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:56:24 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 14:18:30 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/14 14:19:53 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ static char	*cmd(char **path_args, char *name)
 
 	while (*path_args)
 	{
-		tmp = ft_strjoin(*paths, "/");
+		tmp = ft_strjoin(*path_args, "/");
 		ret_cmd = ft_strjoin(tmp, name);
 		free(tmp);
-		if (access(command, F_OK) == 0)
+		if (access(ret_cmd, F_OK) == 0)
 			return (ret_cmd);
 		free(ret_cmd);
 		path_args++;
