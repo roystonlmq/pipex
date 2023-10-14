@@ -6,12 +6,16 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:56:24 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 12:39:43 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/14 13:24:45 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "pipex.h"
 
+/*
+Checks whether the sh cmd is a valid file
+Returns the full path of the sh cmd
+*/
 static char	*cmd(char **path_args, char *name)
 {
 	char	*ret_cmd;
@@ -22,7 +26,7 @@ static char	*cmd(char **path_args, char *name)
 		tmp = ft_strjoin(*paths, "/");
 		ret_cmd = ft_strjoin(tmp, name);
 		free(tmp);
-		if (access(command, F_OK) == F_OK)
+		if (access(command, F_OK) == 0)
 			return (ret_cmd);
 		free(ret_cmd);
 		path_args++;
@@ -31,22 +35,23 @@ static char	*cmd(char **path_args, char *name)
 }
 
 /*
-exec_child2: Responsible for reading from pipe
+child_reader: Responsible for reading from pipe
 
 Duplicate the read end of the pipe to STDIN & closes write end of the pipe
 Write end is not used, so it is closed. 
 */
 void	child_reader(t_pipe piper, char **argv, char **envp)
 {
-	dup2(piper.pipe[0], 0);
-	close(piper.pipe[1]);
-	dup2(piper.outfd, 1);
+	dup2(piper.pipe[READ], STDIN_FILENO);
+	close(piper.pipe[READ]);
+	close(piper.pipe[WRITE]);
+	dup2(piper.outfd, STDOUT_FILENO);
 	piper.cmd_args = ft_split(argv[3], ' ');
 	piper.cmd = cmd(piper.cmd_paths, piper.cmd_args[0]);
 	if (!piper.cmd)
 	{
-		free_child(&piper);
-		err_msg(CMD_ERR);
+		close_child(&piper);
+		ft_putstr_fd(2, CMD_ERR);
 		exit(1);
 	}
 	execve(piper.cmd, piper.cmd_args, envp);
@@ -61,15 +66,16 @@ Ensures any attempt to read from the pipe will result in EOF condition
 */
 void	child_writer(t_pipe piper, char **argv, char **envp)
 {
-	dup2(piper.pipe[1], 1);
-	close(piper.pipe[0]);
-	dup2(piper.infd, 0);
+	dup2(piper.pipe[WRITE], STDOUT_FILENO);
+	close(piper.pipe[WRITE]);
+	close(piper.pipe[READ]);
+	dup2(piper.infd, STDIN_FILENO);
 	piper.cmd_args = ft_split(argv[2], ' ');
 	piper.cmd = cmd(piper.cmd_paths, piper.cmd_args[0]);
 	if (!piper.cmd)
 	{
-		free_child(&piper);
-		err_msg(CMD_ERR);
+		close_child(&piper);
+		ft_putstr_fd(2, CMD_ERR);
 		exit(1);
 	}
 	execve(piper.cmd, piper.cmd_args, envp);
