@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:56:24 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 14:19:53 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/14 14:31:32 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ Write end is not used, so it is closed.
 void	child_reader(t_pipe piper, char **argv, char **envp)
 {
 	dup2(piper.pipe[READ], STDIN_FILENO);
-	close(piper.pipe[READ]);
+	// close(piper.pipe[READ]);
 	close(piper.pipe[WRITE]);
 	dup2(piper.outfd, STDOUT_FILENO);
 	piper.cmd_args = ft_split(argv[3], ' ');
@@ -67,7 +67,7 @@ Ensures any attempt to read from the pipe will result in EOF condition
 void	child_writer(t_pipe piper, char **argv, char **envp)
 {
 	dup2(piper.pipe[WRITE], STDOUT_FILENO);
-	close(piper.pipe[WRITE]);
+	// close(piper.pipe[WRITE]);
 	close(piper.pipe[READ]);
 	dup2(piper.infd, STDIN_FILENO);
 	piper.cmd_args = ft_split(argv[2], ' ');
