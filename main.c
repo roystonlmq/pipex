@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:13:24 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 14:12:53 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/14 14:16:20 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char **argv, char **envp)
 	piper.envpaths = get_envpath(envp);
 	if (piper.envpaths == 0)
 		exception(ENV_ERR);
-	piper.cmd_paths = ft_split(piper.envpath, ':');
+	piper.cmd_paths = ft_split(piper.envpaths, ':');
 	piper.pid1 = fork();
 	if (piper.pid1 == 0)
 		child_reader(piper, argv, envp);
