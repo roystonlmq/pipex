@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 13:30:43 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 13:41:58 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/14 14:07:07 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,30 @@ error_handler.c
 */
 int		putstr_fd(int fd, char *s);
 void	exception(char *error);
+
+/*
+init_child.c
+*/
+void	child_reader(t_pipe piper, char **argv, char **envp);
+void	child_writer(t_pipe piper, char **argv, char **envp);
+
+/*
+mem.c
+*/
+void	*ft_memset(void *s, int c, size_t n);
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t nmemb, size_t size);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+
+/*
+string.c
+*/
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+char	*ft_substr(const char *s, unsigned int start, size_t len);
+char	*ft_strjoin(const char *s1, const char *s2);
+
+/*
+ft_split.c
+*/
+char	**ft_split(const char *s, char c);
 #endif
