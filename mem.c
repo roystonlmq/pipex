@@ -6,9 +6,11 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:58:07 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 14:03:45 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/14 14:14:16 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "pipex.h"
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
