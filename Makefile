@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: roylee <marvin@42.fr>                      +#+  +:+       +#+         #
+#    By: roylee <roylee@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/08 13:53:53 by roylee            #+#    #+#              #
-#    Updated: 2023/10/08 14:13:05 by roylee           ###   ########.fr        #
+#    Updated: 2023/10/14 14:10:52 by roylee           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.c
+SRCS = main.c init_child.c ft_split.c mem.c string.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -22,29 +22,20 @@ CFLAGS = -Wall -Werror -Wextra
 
 RM = rm -f
 
-INC = -I libft/
-
-ADDLIB = -L libft -l ft
-
-LIBFT = libft/libft.a
+INC = -I .
 
 all: $(NAME)
 
 .c.o:
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(LIBFT): 
-	@make -C libft
-
-$(NAME): $(OBJS) $(LIBFT)
-	@$(CC) $(CFLAGS) $(OBJS) $(ADDLIB) -o $(NAME) 
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) 
 
 clean:
-	@make -C libft clean
 	@$(RM) $(OBJS)
 
 fclean: clean
-	@make -C libft fclean
 	@$(RM) $(NAME)
 
 re: fclean all
