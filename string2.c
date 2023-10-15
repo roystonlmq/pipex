@@ -12,6 +12,10 @@
 
 #include "pipex.h"
 
+/*
+ft_strncmp:
+Checks whether first 4 chars matches PATH to find env path
+*/
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
