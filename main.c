@@ -98,5 +98,4 @@ int	main(int argc, char *argv[], char *envp[])
 	if (piper.pid2 == 0)
 		child_writer(piper, argv, envp);
 	run_pipe(&piper);
-	return (0);
 }
