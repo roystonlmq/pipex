@@ -12,6 +12,11 @@
 
 #include "pipex.h"
 
+/*
+ft_memcpy:
+Copies memory, does not account for overlap
+Used in ft_strlcpy
+*/
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned char	*dest_cpy;
