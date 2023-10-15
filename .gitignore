@@ -1,6 +1,6 @@
 *.pdf
-*.out
-libft/*.a
 *.o
-libft/*.o
 pipex
+infile
+outfile
+
