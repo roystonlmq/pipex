@@ -26,7 +26,7 @@ static char	*cmd(char **path_args, char *name)
 		tmp = ft_strjoin(*path_args, "/");
 		ret_cmd = ft_strjoin(tmp, name);
 		free(tmp);
-		if (access(ret_cmd, F_OK) == 0)
+		if (access(ret_cmd, 0) == 0)
 			return (ret_cmd);
 		free(ret_cmd);
 		path_args++;
