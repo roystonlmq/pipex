@@ -10,8 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = main.c init_child.c ft_split.c mem.c string.c error_handler.c string2.c \
-		cleaner.c
+SRCS = main.c ft_split.c mem.c string.c error_handler.c string2.c \
+		cleaner.c init_child.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -20,6 +20,8 @@ NAME = pipex
 CC = cc
 
 CFLAGS = -Wall -Werror -Wextra
+
+DEBUG = -g
 
 RM = rm -f
 
