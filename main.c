@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:13:24 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/15 03:34:53 by marvin           ###   ########.fr       */
+/*   Updated: 2023/10/15 15:25:11 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int argc, char **argv, char **envp)
 	piper.infd = open(argv[INFD], O_RDONLY);
 	if (piper.infd < 0)
 		exception(INFILE);
-	piper.outfd = open(argv[OUTFD], O_CREAT | O_RDWR | O_TRUNC);
+	piper.outfd = open(argv[OUTFD], O_CREAT | O_RDWR, 0644 | O_TRUNC);
 	if (piper.outfd < 0)
 		exception(OUTFILE);
 	if (pipe(piper.pipe) < 0)
