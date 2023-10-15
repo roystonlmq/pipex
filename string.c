@@ -12,6 +12,10 @@
 
 #include "pipex.h"
 
+/*
+ft_strlen:
+Counts the number of chars not including null-terminating byte (1-indexed)
+*/
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -22,12 +26,16 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-static char	*ft_strdup(const char *s)
+/*
+ft_strdup:
+Allocates memory and copies the string over to said memory
+*/
+char	*ft_strdup(const char *s)
 {
 	int		i;
 	char	*buffer;
 
-	buffer = (char *)malloc(ft_strlen(s)+ 1);
+	buffer = (char *)malloc(ft_strlen(s) + 1);
 	if (!buffer)
 		return (0);
 	i = -1;
@@ -37,6 +45,10 @@ static char	*ft_strdup(const char *s)
 	return (buffer);
 }
 
+/*
+ft_strjoin:
+Path join helper function
+*/
 char	*ft_strjoin(const char *s1, const char *s2)
 {
 	int		i;
@@ -58,6 +70,10 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (buffer);
 }
 
+/*
+ft_substr:
+Used to locate the substring in an array of strings
+*/
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
 	char			*buffer;
@@ -75,7 +91,11 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	return (buffer);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+/*
+ft_strlcpy:
+Copies src to dst up to size - 1 bytes then null-terminates it.
+*/
+static size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	slen;
 
