@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 14:13:24 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 14:33:45 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/15 03:34:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ static char	*get_envpath(char **envp)
 	while (ft_strncmp("PATH", *envp, 4))
 		envp++;
 	return (*envp + 5);
+}
+
+/*
+Subroutine
+Closes the pipe and waits for child processes to finish/execute
+Cleans up parent process thereafter
+*/
+void	run_pipe(t_pipe *piper)
+{
+	close_all(piper);
+	waitpid(piper->pid1, NULL, 0);
+	waitpid(piper->pid2, NULL, 0);
+	close_parent(piper);
 }
 
 /*
@@ -45,6 +58,8 @@ int	main(int argc, char **argv, char **envp)
 	piper.outfd = open(argv[OUTFD], O_CREAT | O_RDWR | O_TRUNC);
 	if (piper.outfd < 0)
 		exception(OUTFILE);
+	if (pipe(piper.pipe) < 0)
+		exception(PIPE);
 	piper.envpaths = get_envpath(envp);
 	if (piper.envpaths == 0)
 		exception(ENV_ERR);
@@ -55,8 +70,5 @@ int	main(int argc, char **argv, char **envp)
 	piper.pid2 = fork();
 	if (piper.pid2 == 0)
 		child_reader(piper, argv, envp);
-	close_all(&piper);
-	waitpid(piper.pid1, NULL, 0);
-	waitpid(piper.pid2, NULL, 0);
-	close_parent(&piper);
+	run_pipe(&piper);
 }
