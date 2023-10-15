@@ -54,6 +54,10 @@ static void	*ft_free(char **strs)
 	return (NULL);
 }
 
+/*
+ft_split:
+Gets paths and removes delimiters
+*/
 char	**ft_split(const char *s, char c)
 {
 	char	**ret;
