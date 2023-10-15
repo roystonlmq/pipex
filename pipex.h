@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 13:30:43 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 14:25:03 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/15 03:34:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <sys/types.h> // fork
 # include <sys/wait.h> // wait, waitpid
+
 # include <string.h> // strerror
 # include <fcntl.h> // open, unlink
 # include <stdio.h> // perror
@@ -53,7 +54,7 @@ typedef struct s_pipe
 	char	**cmd_paths;
 	char	**cmd_args;
 	char	*cmd;
-}t_pipe;
+}	t_pipe;
 
 /*
 cleaner.c
@@ -77,15 +78,13 @@ void	child_writer(t_pipe piper, char **argv, char **envp);
 /*
 mem.c
 */
-void	*ft_memset(void *s, int c, size_t n);
-void	ft_bzero(void *s, size_t n);
-void	*ft_calloc(size_t nmemb, size_t size);
 void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 /*
 string.c
 */
 size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);
@@ -93,10 +92,11 @@ char	*ft_strjoin(const char *s1, const char *s2);
 /*
 string2.c
 */
-int	ft_strncmp(const char *s1, const char *s2, size_t n);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /*
 ft_split.c
 */
 char	**ft_split(const char *s, char c);
+
 #endif
