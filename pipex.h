@@ -61,7 +61,7 @@ typedef struct s_pipe
 /*
 cleaner.c
 */
-void	close_all(t_pipe *piper);
+void	close_pipe(t_pipe *piper);
 void	close_parent(t_pipe *piper);
 void	close_child(t_pipe *piper);
 
