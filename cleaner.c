@@ -12,10 +12,13 @@
 
 #include "pipex.h"
 
-void	close_all(t_pipe *piper)
+/*
+Closes read and write of pipe
+*/
+void	close_pipe(t_pipe *piper)
 {
-	close(piper->pipe[0]);
-	close(piper->pipe[1]);
+	close(piper->pipe[READ]);
+	close(piper->pipe[WRITE]);
 }
 
 void	close_parent(t_pipe *piper)
@@ -41,11 +44,3 @@ void	close_child(t_pipe *piper)
 	free(piper->cmd);
 }
 
-/*
-Closes read and write of pipe
-*/
-void	close_pipe(t_pipe piper)
-{
-	close(piper.pipe[READ]);
-	close(piper.pipe[WRITE]);
-}
