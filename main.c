@@ -46,33 +46,6 @@ The parent process is cloned twice (pid1 and pid2)
 Each instance of the clone (pid1/pid2) will be used for 
 executing the write and read end of the pipe
 */
-// int	main(int argc, char **argv, char **envp)
-// {
-// 	t_pipe	piper;
-
-// 	if (argc != 5)
-// 		return (ft_putstr_fd(2, ARGS_ERR));
-// 	piper.infd = open(argv[INFD], O_RDONLY);
-// 	if (piper.infd < 0)
-// 		exception(INFILE);
-// 	piper.outfd = open(argv[OUTFD], O_CREAT | O_RDWR, 0644 | O_TRUNC);
-// 	if (piper.outfd < 0)
-// 		exception(OUTFILE);
-// 	if (pipe(piper.pipe) < 0)
-// 		exception(PIPE);
-// 	piper.envpaths = get_envpath(envp);
-// 	if (piper.envpaths == 0)
-// 		exception(ENV_ERR);
-// 	piper.cmd_paths = ft_split(piper.envpaths, ':');
-// 	piper.pid1 = fork();
-// 	if (piper.pid1 == 0)
-// 		child_writer(piper, argv, envp);
-// 	piper.pid2 = fork();
-// 	if (piper.pid2 == 0)
-// 		child_reader(piper, argv, envp);
-// 	run_pipe(&piper);
-// }
-
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipe	piper;
