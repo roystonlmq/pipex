@@ -66,9 +66,9 @@ int	main(int argc, char *argv[], char *envp[])
 	piper.cmd_paths = ft_split(piper.envpaths, ':');
 	piper.pid1 = fork();
 	if (piper.pid1 == 0)
-		child_reader(piper, argv, envp, CMD2);
+		execute_child(piper, argv, envp, CMD1);
 	piper.pid2 = fork();
 	if (piper.pid2 == 0)
-		child_writer(piper, argv, envp, CMD1);
+		execute_child(piper, argv, envp, CMD2);
 	run_pipe(&piper);
 }
