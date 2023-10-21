@@ -35,6 +35,8 @@ Argument index for infd, outfd
 0		1	  2	   3    4
 */
 # define INFD 1
+# define CMD1 2
+# define CMD2 3
 # define OUTFD 4
 
 /*
@@ -72,8 +74,8 @@ void	exception(char *error);
 /*
 init_child.c
 */
-void	child_reader(t_pipe piper, char **argv, char **envp);
-void	child_writer(t_pipe piper, char **argv, char **envp);
+void	child_reader(t_pipe piper, char **argv, char **envp, int cmd_idx);
+void	child_writer(t_pipe piper, char **argv, char **envp, int cmd_idx);
 
 /*
 mem.c
