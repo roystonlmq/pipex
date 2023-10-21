@@ -74,8 +74,8 @@ void	exception(char *error);
 /*
 init_child.c
 */
-void	child_reader(t_pipe piper, char **argv, char **envp, int cmd_idx);
-void	child_writer(t_pipe piper, char **argv, char **envp, int cmd_idx);
+// void	child_reader(t_pipe piper, char **argv, char **envp, int cmd_idx);
+void	execute_child(t_pipe piper, char **argv, char **envp, int cmd_idx);
 
 /*
 mem.c
