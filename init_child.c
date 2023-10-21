@@ -45,47 +45,35 @@ void	execute_args(t_pipe piper, char **argv, char **envp, int cmd_idx)
 	}
 	execve(piper.cmd, piper.cmd_args, envp);
 }
-/*
-Pipe overview
-
-(STDIN) ls -l (OUTFD/WRITE) =======> (INFD/READ) wc -l (STDOUT)
-
-child_reader: Responsible for reading from pipe
-
-Responsible for handling CMD2. Duplicates the read end of the pipe 
-to STDIN. 
-Write end of the pipe is not used, so it is closed. 
-Duplicates the output fd into STDOUT.
-*/
-void	child_reader(t_pipe piper, char **argv, char **envp, int cmd_idx)
-{
-	dup2(piper.pipe[READ], STDIN_FILENO);
-	dup2(piper.outfd, STDOUT_FILENO);
-	close_pipe(&piper);
-	execute_args(piper, argv, envp, cmd_idx);
-}
 
 /*
 Pipe overview
-t ttesteststsetstsetsttststststststststststststes
+			CHILD 1		  	  PIPE			 CHILD 2	 
+INFILE (IN) ls -l  (OUT) (IN) ---- (OUT)(IN) wc -l (OUT) OUTFILE
 
-(STDIN) ls -l (OUT FD/WRITE) =======> (IN FD/READ) wc -l (STDOUT)
+execute_child: Executes the child process based on cmd_idx
 
-child_writer: Responsible for writing from pipe
+If CMD1, write end of the pipe is duplicated to STDOUT and IN FD is duplicated
+to STDIN. Executes CMD1 such that the output is written into the pipe.
 
-
-Responsible for handling CMD1 because CMD1's output is written to
-the pipe (infd)
-Duplicate the write end of the pipe to STDOUT.
-Read end is not used so it is closed.
-Duplicates the input fd into STDIN.
-
-Ensures any attempt to read from the pipe will result in EOF condition
+If CMD2, read end of the pipe is duplicated to STDIN and OUT FD is duplicated
+to STDOUT. Executes CMD2 such that the input from the pipe is absorbed and 
+outputs the result in STDOUT.
 */
-void	child_writer(t_pipe piper, char **argv, char **envp, int cmd_idx)
+void	execute_child(t_pipe piper, char **argv, char **envp, int cmd_idx)
 {
-	dup2(piper.pipe[WRITE], STDOUT_FILENO);
-	dup2(piper.infd, STDIN_FILENO);
-	close_pipe(&piper);
-	execute_args(piper, argv, envp, cmd_idx);
+	if (cmd_idx == CMD1)
+	{
+		dup2(piper.infd, STDIN_FILENO);
+		dup2(piper.pipe[WRITE], STDOUT_FILENO);
+		close_pipe(&piper);
+		execute_args(piper, argv, envp, cmd_idx);
+	}
+	else
+	{
+		dup2(piper.outfd, STDOUT_FILENO);
+		dup2(piper.pipe[READ], STDIN_FILENO);
+		close_pipe(&piper);
+		execute_args(piper, argv, envp, cmd_idx);
+	}
 }
