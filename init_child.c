@@ -34,6 +34,12 @@ static char	*cmd(char **path_args, char *name)
 	return (0);
 }
 
+/*
+execute_args: Executes shell command with its args
+
+Uses space as a delimiter to find the args. 
+Known bug: Does not work with diff quotes
+*/
 void	execute_args(t_pipe piper, char **argv, char **envp, int cmd_idx)
 {
 	piper.cmd_args = ft_split(argv[cmd_idx], ' ');
