@@ -60,8 +60,8 @@ Duplicates the output fd into STDOUT.
 void	child_reader(t_pipe piper, char **argv, char **envp, int cmd_idx)
 {
 	dup2(piper.pipe[READ], STDIN_FILENO);
-	close_pipe(piper);
 	dup2(piper.outfd, STDOUT_FILENO);
+	close_pipe(&piper);
 	execute_args(piper, argv, envp, cmd_idx);
 }
 
@@ -85,7 +85,7 @@ Ensures any attempt to read from the pipe will result in EOF condition
 void	child_writer(t_pipe piper, char **argv, char **envp, int cmd_idx)
 {
 	dup2(piper.pipe[WRITE], STDOUT_FILENO);
-	close_pipe(piper);
 	dup2(piper.infd, STDIN_FILENO);
+	close_pipe(&piper);
 	execute_args(piper, argv, envp, cmd_idx);
 }
