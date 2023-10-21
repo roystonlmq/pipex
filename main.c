@@ -33,7 +33,7 @@ Cleans up parent process thereafter
 */
 void	run_pipe(t_pipe *piper)
 {
-	close_all(piper);
+	close_pipe(piper);
 	waitpid(piper->pid1, NULL, 0);
 	waitpid(piper->pid2, NULL, 0);
 	close_parent(piper);
@@ -66,9 +66,9 @@ int	main(int argc, char *argv[], char *envp[])
 	piper.cmd_paths = ft_split(piper.envpaths, ':');
 	piper.pid1 = fork();
 	if (piper.pid1 == 0)
-		child_reader(piper, argv, envp);
+		child_reader(piper, argv, envp, CMD2);
 	piper.pid2 = fork();
 	if (piper.pid2 == 0)
-		child_writer(piper, argv, envp);
+		child_writer(piper, argv, envp, CMD1);
 	run_pipe(&piper);
 }
