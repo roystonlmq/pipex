@@ -51,8 +51,7 @@ void	child_reader(t_pipe piper, char **argv, char **envp)
 	if (!piper.cmd)
 	{
 		close_child(&piper);
-		ft_putstr_fd(2, CMD_ERR);
-		exit(1);
+		exception(CMD_ERR);
 	}
 	execve(piper.cmd, piper.cmd_args, envp);
 }
@@ -75,8 +74,7 @@ void	child_writer(t_pipe piper, char **argv, char **envp)
 	if (!piper.cmd)
 	{
 		close_child(&piper);
-		ft_putstr_fd(2, CMD_ERR);
-		exit(1);
+		exception(CMD_ERR);
 	}
 	execve(piper.cmd, piper.cmd_args, envp);
 }
