@@ -40,3 +40,12 @@ void	close_child(t_pipe *piper)
 	free(piper->cmd_args);
 	free(piper->cmd);
 }
+
+/*
+Closes read and write of pipe
+*/
+void	close_pipe(t_pipe piper)
+{
+	close(piper.pipe[READ]);
+	close(piper.pipe[WRITE]);
+}
