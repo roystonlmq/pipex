@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 13:30:43 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/15 14:24:09 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/29 05:05:15 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@ typedef struct s_pipe
 	char	*cmd;
 }	t_pipe;
 
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}	t_list;
+
 /*
 cleaner.c
 */
@@ -89,6 +95,7 @@ size_t	ft_strlen(const char *s);
 char	*ft_strdup(const char *s);
 char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	*ft_strjoin(const char *s1, const char *s2);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
 /*
 string2.c
@@ -99,5 +106,12 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 ft_split.c
 */
 char	**ft_split(const char *s, char c);
+
+/* 
+list.c
+*/
+t_list	*ft_lstnew(void *content);
+t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstadd_back(t_list **lst, t_list *new);
 
 #endif
