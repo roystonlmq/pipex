@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:40:10 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/15 14:24:44 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/29 05:05:09 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 ft_strlcpy:
 Copies src to dst up to size - 1 bytes then null-terminates it.
 */
-static size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	slen;
 
