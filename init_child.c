@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:56:24 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/29 18:35:45 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/30 01:11:26 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static char	*cmd(char **path_args, char *name)
 		free(ret_cmd);
 		path_args++;
 	}
+	if (access(name, 0) == 0)
+		return (ret_cmd);
 	return (0);
 }
 
