@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:40:10 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/29 05:05:09 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/29 05:36:09 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ Used to locate the substring in an array of strings
 */
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	char			*buffer;
+	char	*buffer;
 
 	if (!s)
 		return (NULL);
