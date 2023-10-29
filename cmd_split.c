@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:54:22 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/29 05:27:33 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/29 18:37:30 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int	is_quote(char c)
 {
 	if (c == '\'')
-		return ((int)'\'');
+		return ((int) '\'');
 	if (c == '\"')
-		return ((int)'\"');
+		return ((int) '\"');
 	return (0);
 }
 
@@ -32,72 +32,71 @@ static int	find_cmdidx(const char *s)
 			break ;
 		i++;
 	}
-	return (i);	
+	return (i);
 }
 
-static char	*get_cmd(const char *s)
-{
-	int		i;
-	char	*cmd;
-
-	i = find_cmdidx(s);
-	return (ft_substr(s, 0, i));
-}
-
-t_list	*parse_quote(const char *s, char *param)
+static int	parse_quote(const char *s, char **param)
 {
 	int		j;
 	int		k;
 	int		quote_type;
 
-	quote_type = 0; // default: false
-	s += find_cmdidx(s);
+	quote_type = 0;
 	j = 0;
 	while (s[j++])
 	{
-		if (quote_type)
+		if (quote_type && quote_type == is_quote(s[j]))
 		{
-			if (quote_type == is_quote(s[j]))
-			{
-				param = malloc(j - k + 2);
-				if (!param)
-					return (NULL);
-				ft_strlcpy(param, s + k, j - k + 1);
-			}
-					
+			*param = malloc(j - k + 2);
+			if (!*param)
+				return (-1);
+			ft_strlcpy(*param, s + k, j - k + 1);
+			break ;
 		}
-		if (!quote_type)
+		if (!quote_type && is_quote(s[j]))
 		{
-			if (is_quote(s[j]))
-			{
-				k = j + 1;
-				quote_type = s[j];
-			}
+			k = j + 1;
+			quote_type = s[j];
 		}
 	}
-	return (ft_lstnew(param));
+	return (j);
 }
 
 t_list	*cmd_split(const char *cmdstr)
 {
-	t_list	*cmd_list;
-	char	*param;
+	t_cmds	cmdargs;
 
-	cmd_list = ft_lstnew(get_cmd(cmdstr));
-	cmd_list->next = parse_quote(cmdstr, param);
-	free(param);
-	return (cmd_list);
+	cmdargs.cmdidx = find_cmdidx(cmdstr);
+	cmdargs.param = NULL;
+	cmdargs.cmd_list = ft_lstnew(ft_substr(cmdstr, 0, cmdargs.cmdidx));
+	cmdargs.head = cmdargs.cmd_list;
+	cmdargs.cmdlen = ft_strlen(cmdstr);
+	cmdargs.ch_parsed = 0 + cmdargs.cmdidx;
+	while (cmdargs.ch_parsed < cmdargs.cmdlen - 1)
+	{
+		cmdargs.ch_parsed += parse_quote(cmdstr + \
+		cmdargs.ch_parsed, &cmdargs.param);
+		(cmdargs.cmd_list)->next = ft_lstnew(cmdargs.param);
+		cmdargs.cmd_list = (cmdargs.cmd_list)->next;
+	}
+	cmdargs.cmd_list = cmdargs.head;
+	return (cmdargs.cmd_list);
 }
-
+/*
 int	main(void)
 {
 	t_list	*cmd_list;
-	
-	const char *teststr = "echo \"$USER | 'ici c'est Paris;\"";
+	char	**cmd_strarr;
+	const char	*teststr = "awk \"{count++} END \
+	{printf \"count: %i\" , count}\" \"/etc/passwd\"";
 	cmd_list = cmd_split(teststr);
-	while (cmd_list)
-	{
-		printf("%s \n", (char *) cmd_list->content);
-		cmd_list = cmd_list->next;
+	cmd_strarr = lst_to_strarr(cmd_list);
+	printf("testing cmdstr: %s \n", teststr);
+	for (int i = 0; cmd_strarr[i]; i++)
+	{	
+		printf("%s \n", cmd_strarr[i]);
+		// free(cmd_strarr[i]);
 	}
+	execve("/bin/awk", cmd_strarr + 1, NULL);
 }
+*/
