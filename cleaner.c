@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 13:12:15 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/14 14:25:18 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/29 18:38:26 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,3 @@ void	close_child(t_pipe *piper)
 	free(piper->cmd_args);
 	free(piper->cmd);
 }
-
