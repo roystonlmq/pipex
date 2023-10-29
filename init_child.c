@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:56:24 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/15 17:52:09 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/29 18:35:45 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ Known bug: Does not work with diff quotes
 */
 void	execute_args(t_pipe piper, char **argv, char **envp, int cmd_idx)
 {
-	piper.cmd_args = ft_split(argv[cmd_idx], ' ');
+	if (ft_strchr(argv[cmd_idx], '\'') || ft_strchr(argv[cmd_idx], '\"'))
+		piper.cmd_args = lst_to_strarr(cmd_split(argv[cmd_idx]));
+	else
+		piper.cmd_args = ft_split(argv[cmd_idx], ' ');
 	piper.cmd = cmd(piper.cmd_paths, piper.cmd_args[0]);
 	if (!piper.cmd)
 	{
