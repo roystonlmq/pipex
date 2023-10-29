@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 13:30:43 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/29 05:05:15 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/29 18:39:33 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,16 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+typedef struct s_cmds
+{
+	t_list	*cmd_list;
+	t_list	*head;
+	char	*param;
+	size_t	cmdidx;
+	size_t	ch_parsed;
+	size_t	cmdlen;
+}	t_cmds;
+
 /*
 cleaner.c
 */
@@ -101,6 +111,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 string2.c
 */
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strchr(const char *s, int c);
 
 /*
 ft_split.c
@@ -112,6 +123,11 @@ list.c
 */
 t_list	*ft_lstnew(void *content);
 t_list	*ft_lstlast(t_list *lst);
-t_list	*ft_lstadd_back(t_list **lst, t_list *new);
+int		ft_lstsize(t_list *lst);
+char	**lst_to_strarr(t_list *lst);
 
+/*
+cmd_split.c
+*/
+t_list	*cmd_split(const char *cmdstr);
 #endif
