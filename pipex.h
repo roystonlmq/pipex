@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/08 13:30:43 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/29 18:39:33 by roylee           ###   ########.fr       */
+/*   Updated: 2023/11/04 19:10:41 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,13 @@ typedef struct s_cmds
 	size_t	cmdlen;
 }	t_cmds;
 
+typedef struct s_quote
+{
+	int	j;
+	int	k;
+	int	quote_type;
+}	t_quote;
+
 /*
 cleaner.c
 */
@@ -90,7 +97,6 @@ void	exception(char *error);
 /*
 init_child.c
 */
-// void	child_reader(t_pipe piper, char **argv, char **envp, int cmd_idx);
 void	execute_child(t_pipe piper, char **argv, char **envp, int cmd_idx);
 
 /*
