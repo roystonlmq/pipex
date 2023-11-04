@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/14 11:56:24 by roylee            #+#    #+#             */
-/*   Updated: 2023/10/30 01:11:26 by roylee           ###   ########.fr       */
+/*   Updated: 2023/10/31 13:58:01 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 Checks whether the sh cmd is a valid file
 Returns the full path of the sh cmd
 */
-static char	*cmd(char **path_args, char *name)
+static char	*path_to_cmd(char **path_args, char *name)
 {
 	char	*ret_cmd;
 	char	*tmp;
@@ -48,7 +48,7 @@ void	execute_args(t_pipe piper, char **argv, char **envp, int cmd_idx)
 		piper.cmd_args = lst_to_strarr(cmd_split(argv[cmd_idx]));
 	else
 		piper.cmd_args = ft_split(argv[cmd_idx], ' ');
-	piper.cmd = cmd(piper.cmd_paths, piper.cmd_args[0]);
+	piper.cmd = path_to_cmd(piper.cmd_paths, piper.cmd_args[0]);
 	if (!piper.cmd)
 	{
 		close_child(&piper);
