@@ -6,7 +6,7 @@
 /*   By: roylee <roylee@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 23:54:22 by roylee            #+#    #+#             */
-/*   Updated: 2023/11/04 19:14:03 by roylee           ###   ########.fr       */
+/*   Updated: 2023/11/04 19:16:25 by roylee           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ static int	find_cmdidx(const char *s)
 	return (i);
 }
 
-static void	quote_type_check(t_quote *data)
+static void	quote_type_check(t_quote *data, const char *s)
 {
 	if (!data->quote_type && is_quote(s[data->j]))
 	{
 		data->k = data->j + 1;
-		quote_type = s[data->j];
+		data->quote_type = s[data->j];
 	}
 }
 
@@ -67,15 +67,14 @@ static int	parse_quote(const char *s, char **param)
 				break ;
 			}
 		}
-		quote_type_check(&data);
+		quote_type_check(&data, s);
 	}
-	return (j);
+	return (data.j);
 }
 
 t_list	*cmd_split(const char *cmdstr)
 {
 	t_cmds	cmdargs;
-	int		k;
 
 	cmdargs.cmdidx = find_cmdidx(cmdstr);
 	cmdargs.param = NULL;
@@ -86,7 +85,7 @@ t_list	*cmd_split(const char *cmdstr)
 	while (cmdargs.ch_parsed < cmdargs.cmdlen - 1)
 	{
 		cmdargs.ch_parsed += parse_quote(cmdstr + \
-		cmdargs.ch_parsed, &cmdargs.param, k);
+		cmdargs.ch_parsed, &cmdargs.param);
 		(cmdargs.cmd_list)->next = ft_lstnew(cmdargs.param);
 		cmdargs.cmd_list = (cmdargs.cmd_list)->next;
 	}
